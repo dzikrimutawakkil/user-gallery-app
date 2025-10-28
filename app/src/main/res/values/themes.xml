@@ -1,0 +1,6 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.TechTestUserApp" parent="Theme.Material3.DayNight">
+    </style>
+
+    <style name="Theme.TechTestUserApp" parent="Base.Theme.TechTestUserApp" />
+</resources>
