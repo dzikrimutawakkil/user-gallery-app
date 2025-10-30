@@ -12,7 +12,7 @@ import com.techtestuserapp.databinding.ItemMediaBinding
 import java.io.File
 
 class GalleryAdapter(
-    private val onClick: (MediaEntity) -> Unit
+    private val onClick: (MediaEntity, Int) -> Unit
 ) : ListAdapter<MediaEntity, GalleryAdapter.MediaViewHolder>(MediaDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MediaViewHolder {
@@ -22,20 +22,20 @@ class GalleryAdapter(
 
     override fun onBindViewHolder(holder: MediaViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, position)
     }
 
     inner class MediaViewHolder(private val binding: ItemMediaBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: MediaEntity) {
+        fun bind(item: MediaEntity, position: Int) {
             binding.ivPlayIcon.visibility = if (item.type == "VIDEO") View.VISIBLE else View.GONE
 
             binding.ivMedia.load(File(item.uri)) {
                 crossfade(true)
             }
 
-            binding.root.setOnClickListener { onClick(item) }
+            binding.root.setOnClickListener { onClick(item, position) }
         }
     }
 

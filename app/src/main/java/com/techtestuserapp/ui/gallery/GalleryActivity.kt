@@ -17,6 +17,7 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.techtestuserapp.databinding.ActivityGalleryBinding
+import com.techtestuserapp.ui.mediapreview.MediaPreviewActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.io.File
@@ -38,8 +39,7 @@ class GalleryActivity : AppCompatActivity() {
 
     private var userId: Int = -1
     private var tempImageUri: Uri? = null
-
-    // --- ActivityResultLaunchers ---
+    private var userName: String = "User"
 
     // Camera Permission
     private val requestCameraPermission =
@@ -87,7 +87,7 @@ class GalleryActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         userId = intent.getIntExtra(EXTRA_USER_ID, -1)
-        val userName = intent.getStringExtra(EXTRA_USER_NAME) ?: "User"
+        userName = intent.getStringExtra(EXTRA_USER_NAME) ?: "User"
 
         if (userId == -1) {
             Toast.makeText(this, "User ID tidak valid", Toast.LENGTH_SHORT).show()
@@ -111,18 +111,13 @@ class GalleryActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        galleryAdapter = GalleryAdapter { mediaItem ->
-            val intent = Intent(Intent.ACTION_VIEW)
-            val file = File(mediaItem.uri)
-            val uri = FileProvider.getUriForFile(this, "$packageName.provider", file)
-            val mimeType = if (mediaItem.type == "IMAGE") "image/jpeg" else "video/mp4"
-            intent.setDataAndType(uri, mimeType)
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            try {
-                startActivity(intent)
-            } catch (e: Exception) {
-                Toast.makeText(this, "Tidak ada aplikasi untuk membuka file ini", Toast.LENGTH_SHORT).show()
+        galleryAdapter = GalleryAdapter { _, position ->
+            val intent = Intent(this, MediaPreviewActivity::class.java).apply {
+                putExtra(MediaPreviewActivity.EXTRA_USER_ID, userId)
+                putExtra(MediaPreviewActivity.EXTRA_USER_NAME, userName)
+                putExtra(MediaPreviewActivity.EXTRA_CLICKED_POSITION, position)
             }
+            startActivity(intent)
         }
         binding.recyclerViewGallery.adapter = galleryAdapter
     }

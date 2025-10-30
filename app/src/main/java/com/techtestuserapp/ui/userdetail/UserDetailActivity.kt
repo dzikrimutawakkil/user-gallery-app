@@ -48,11 +48,19 @@ class UserDetailActivity : AppCompatActivity() {
             return
         }
 
+        setupToolbar()
         populateUserData()
         setupListeners()
         observeViewModel()
 
         user?.id?.let { viewModel.fetchPosts(it) }
+    }
+
+    private fun setupToolbar() {
+        binding.toolbarDetail.title = user?.name ?: "User Detail"
+        binding.toolbarDetail.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     private fun populateUserData() {
@@ -108,11 +116,10 @@ class UserDetailActivity : AppCompatActivity() {
 
     private fun setupChart(postCount: Int) {
         val entries = ArrayList<BarEntry>()
-        // BarChart hanya butuh 1 value
         entries.add(BarEntry(1f, postCount.toFloat()))
 
         val dataSet = BarDataSet(entries, "Jumlah Post")
-        dataSet.color = Color.BLUE
+        dataSet.color = Color.GRAY
         dataSet.valueTextColor = Color.BLACK
         dataSet.valueTextSize = 16f
 

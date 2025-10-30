@@ -38,11 +38,18 @@
 
         <activity
             android:name=".ui.userdetail.UserDetailActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.TechTestUserApp.NoActionBar"/>
 
         <activity
             android:name=".ui.gallery.GalleryActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.TechTestUserApp.NoActionBar"/>
+
+        <activity
+            android:name=".ui.mediapreview.MediaPreviewActivity"
+            android:exported="false"
+            android:theme="@style/Theme.TechTestUserApp.NoActionBar" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -3,4 +3,8 @@
     <cache-path
         name="camera"
         path="." />
+
+    <files-path
+        name="internal_files"
+        path="." />
 </paths>

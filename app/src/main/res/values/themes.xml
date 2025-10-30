@@ -3,4 +3,7 @@
     </style>
 
     <style name="Theme.TechTestUserApp" parent="Base.Theme.TechTestUserApp" />
+
+    <style name="Theme.TechTestUserApp.NoActionBar" parent="Theme.Material3.DayNight.NoActionBar">
+    </style>
 </resources>
