@@ -8,7 +8,7 @@ Aplikasi ini dibangun dengan arsitektur MVVM modern, menggunakan Kotlin, Corouti
 
 Anda dapat mengunduh file `.apk` yang dapat diinstal langsung dari rilis terbaru kami.
 
-[Download APK (v1.0.0)](PASTE_LINK_YANG_ANDA_SALIN_DI_SINI)
+[Download APK (v1.0.0)](https://github.com/dzikrimutawakkil/user-gallery-app/releases/download/v1.0.0/TechTestUserApp.apk)
 
 ---
 
@@ -73,3 +73,4 @@ Anda dapat mengunduh file `.apk` yang dapat diinstal langsung dari rilis terbaru
 2.  Buka proyek di [Android Studio](https://developer.android.com/studio).
 
 3.  Jalankan aplikasi (Run 'app').
+
